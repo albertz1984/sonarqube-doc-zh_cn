@@ -28,10 +28,16 @@ SoanrQube能够分析20多种编程语言。分析结果包含质量度量和问
 在分析过程中，从服务器请求数据，并对文件进行分析。分析结果以报告的形式回传到服务器，并在服务器端进行处理。
 
 分析报告会在队列中被依次处理，因此分析刚刚完成时，可能在短时间内还无法看到分析结果。你可以在项目首页看到一个图标，表示分析正在进行中。
+
 ![IMG](https://docs.sonarqube.org/7.9/images/backgroundTaskProcessingInProgress.jpeg)
+
 分析完成后图标消失。但如果分析失败，图标将会变成下面这样：
+
 ![IMG](https://docs.sonarqube.org/7.9/images/backgroundTaskProcessingFailedIcon.jpeg)
 
 ## FAQ
-Q.如何解决分析错误：java.lang.OutOfMemoryError: GC overhead limit exceeded.
+### Q.如何解决分析错误：java.lang.OutOfMemoryError: GC overhead limit exceeded.
+
 A.这表明你的项目太大，或太复杂。用默认分配的内存无法完成分析。你需要给分析进程分配更大的堆（使用```-Xmx[内存大小]```）。有些持续集成平台可能提供一个配置项来让你制定必要的值。例如：在Jenkins作业中使用Maven Build Step来运行分析。或者使用Java相关选项来设定更高的值。
+
+> 原文链接：https://docs.sonarqube.org/7.9/analysis/overview/
