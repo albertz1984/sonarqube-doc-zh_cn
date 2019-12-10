@@ -84,14 +84,14 @@
 
 ### 重复代码
 
-| Key                                   | Description                                                  | Default |
+| 参数Key                                   | 描述                                                  | 默认值 |
 | ------------------------------------- | ------------------------------------------------------------ | ------- |
 | `sonar.cpd.${language}.minimumtokens` | 一段代码被判定重复的条件：至少有100个连续的重复特征（token）分布在至少10行代码中。上述默认设定中的100和10两个参数分别使用`sonar.cpd.${language}.minimumtokens`和`sonar.cpd.${language}.minimumLines来覆盖`。在Java项目中，一段代码被判定重复的条件：至少10个连续的语句，不考虑重复特征数和行数。这个阈值不能被覆盖率。 | 100     |
 | `sonar.cpd.${language}.minimumLines`  | (同上)                                                       | 10      |
 
 ### 分析日志
 
-| Key                              | Description                                                  | Default                       |
+| 参数Key                              | 描述                                                  | 默认值                       |
 | -------------------------------- | ------------------------------------------------------------ | ----------------------------- |
 | `sonar.log.level`                | 设定分析过程中产生日志的数量和级别。`DEBUG`: 显示 `INFO` 日志 + 更多`DEBUG` 级别的日志. 类似于 `sonar.verbose=true`. `TRACE`: 显示 `DEBUG` 日志 + 所有ElasticSearch查询和SonarScanner调用WebAPI的计时。 | `INFO`                        |
 | `sonar.verbose`                  | 记录更多的客户端和服务端的分析日志，激活Scanner的`DEBUG`模式并添加客户端侧的环境变量和系统属性到服务器端的分析报告处理日志。![img](https://docs.sonarqube.org/7.9/images/exclamation.svg)注意：用该属性可能泄露密码等被存储为服务器端环境变量的敏感信息。 | `false`                       |
