@@ -1,5 +1,4 @@
-# SonarQube Documentation Translated into Simplified Chinese
-
+# SonarQube官方文档-简体中文翻译
 
 This repo contains the simplified Chinese translation markdown files of the official SonarQube documentation.
 Only for LTS version (currently 7.9).
