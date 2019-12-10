@@ -74,29 +74,32 @@
 | `sonar.externalIssuesReportPaths` | 通用问题报告（Generic Issues Report）的路径，多个路径用逗号分隔。 |                                                              |
 | `sonar.projectDate`               | 给当前的分析指定一个日期。该参数仅在你想要补充一个为分析过的历史扫描结果时有用。格式为`yyyy-MM-dd`，例如：2010-12-01。你不能创建一个比最后一次分析的日期还早的分析，重建项目的历史扫描记录，必须按照时间顺序进行。最早日期要作为第一次分析。![img](https://docs.sonarqube.org/7.9/images/exclamation.svg)请注意，如果你想补充很久之前的历史扫描，可能需要调整数据清理的相关设置。 | 操作系统当前日期                                             |
 | `sonar.projectBaseDir`            | 使用该属性来指定项目根目录。例如：分析从`jenkins/jobs/myjob/workspace`启动，但要分析的文件在`ftpdrop/cobol/project1`。这个路径可以是绝对或相对路径。不是指定源路径，而是指定源路径的上级路径。这里设定的路径，成为其他目录设定的起始点。请注意分析进行需要对这个路径有写入权限，这里将创建`sonar.working.directory` |                                                              |
-| `sonar.working.directory`         | Set the working directory for an analysis triggered with the SonarScanner or the SonarScanner for Ant (versions greater than 2.0). This property is not compatible with the SonarScanner for MSBuild. Path must be relative, and unique for each project. ![img](https://docs.sonarqube.org/7.9/images/exclamation.svg) Beware: the specified folder is deleted before each analysis. | `.sonar`                                                     |
-| `sonar.scm.provider`              | This property can be used to explicitly tell SonarQube which SCM plugin should be used to grab SCM data on the project (in case auto-detection does not work). The value of this property is always lowercase and depends on the plugin (ex. "tfvc" for the TFVC plugin). Check the documentation page of each plugin for more. |                                                              |
-| `sonar.scm.forceReloadAll`        | By default, blame information is only retrieved for changed files. Set this property to `true` to load blame information for all files. This can be useful is you feel that some SCM data is outdated but SonarQube does not get the latest information from the SCM engine. |                                                              |
-| `sonar.scm.exclusions.disabled`   | For supported engines, files ignored by the SCM, i.e. files listed in `.gitignore`, will automatically be ignored by analysis too. Set this property to `true` to disable that feature. |                                                              |
-| `sonar.scm.revision`              | Overrides the revision, for instance the Git sha1, displayed in analysis results. By default value is provided by the CI environment or guessed by the checked-out sources. |                                                              |
-| `sonar.buildString`               | The string passed with this property will be stored with the analysis and available in the results of `api/project_analyses/search`, thus allowing you to later identify a specific analysis and obtain its ID for use with `api/project_analyses/set_baseline`. |                                                              |
-| `sonar.analysis.[yourKey]`        | This property stub allows you to insert custom key/value pairs into the analysis context, which will also be passed forward to [webhooks](https://docs.sonarqube.org/7.9/project-administration/webhooks/). |                                                              |
+| `sonar.working.directory`         | 设定SonarScanner（或SonarScanner for Ant 2.0以上版本）执行分析的工作目录。该属性与SonarScanner for MSBuild不兼容。必须使用相对路径，并且对每个项目设定唯一值。![img](https://docs.sonarqube.org/7.9/images/exclamation.svg)注意：指定的文件夹在每次分析执行前会被删除。 | `.sonar`                                                     |
+| `sonar.scm.provider`              | 如果无法自动检测版本控制系统，可使用该属性明确指定SonarQube使用的版本控制系统插件，以便抓取版本控制系统数据。该属性的值总是使用小写字母，并由插件决定。例如：用“tfvc” 来指定TFVC插件，如有需要请查看其他插件的文档。 |                                                              |
+| `sonar.scm.forceReloadAll`        | 默认情况下，只会抓取变更文件的blame信息。设定该属性为`true`则会抓取所有文件的blame信息。当你感到一些版本控制系统的数据不是最新的，但SonarQube又没有能够获取最新数据的情况下可以使用这个设定。 |                                                              |
+| `sonar.scm.exclusions.disabled`   | 对于支持的版本控制系统，自动忽略被版本控制系统忽略的文件。例如，在`.gitignore`文件中被忽略的文件会在分析中被自动忽略。设定该属性为`true`会关闭这一功能。 |                                                              |
+| `sonar.scm.revision`              | Overrides the revision, for instance the Git sha1, displayed in analysis results. By default value is provided by the CI environment or guessed by the checked-out sources. 覆盖分析结果中显示的版本控制系统修订，例如Git的sha1值。默认情况下，值由持续集成环境提供或由检出的代码推测。（不懂这个属性什么意思，估计也不会有人用到。原文保留在这里，谁知道的话欢迎贡献翻译。谢谢！） |                                                              |
+| `sonar.buildString`               | 由该属性传入的字符串将和分析结果一起存储，并在`api/project_analyses/search`结果中可见。因此，你可以后续识别出一次特定的分析并获取它的ID用于`api/project_analyses/set_baseline` |                                                              |
+| `sonar.analysis.[yourKey]`        | 该属性允许你在分析上下文中插入定制的key/value对，并会被传送给[webhooks](https://docs.sonarqube.org/7.9/project-administration/webhooks/) |                                                              |
 
 ### 重复代码
 
 | Key                                   | Description                                                  | Default |
 | ------------------------------------- | ------------------------------------------------------------ | ------- |
-| `sonar.cpd.${language}.minimumtokens` | A piece of code is considered duplicated as soon as there are at least 100 duplicated tokens in a row (override with `sonar.cpd.${language}.minimumTokens`) spread across at least 10 lines of code (override with `sonar.cpd.${language}.minimumLines`). For Java projects, a piece of code is considered duplicated when there is a series of at least 10 statements in a row, regardless of the number of tokens and lines. This threshold cannot be overridden. | 100     |
-| `sonar.cpd.${language}.minimumLines`  | (see above)                                                  | 10      |
+| `sonar.cpd.${language}.minimumtokens` | 一段代码被判定重复的条件：至少有100个连续的重复特征（token）分布在至少10行代码中。上述默认设定中的100和10两个参数分别使用`sonar.cpd.${language}.minimumtokens`和`sonar.cpd.${language}.minimumLines来覆盖`。在Java项目中，一段代码被判定重复的条件：至少10个连续的语句，不考虑重复特征数和行数。这个阈值不能被覆盖率。 | 100     |
+| `sonar.cpd.${language}.minimumLines`  | (同上)                                                       | 10      |
 
 ### 分析日志
 
-| Key                              | Description                                                  | Default                            |
-| -------------------------------- | ------------------------------------------------------------ | ---------------------------------- |
-| `sonar.log.level`                | Control the quantity / level of logs produced during an analysis. `DEBUG`: Display `INFO` logs + more details at `DEBUG` level. Similar to `sonar.verbose=true`. `TRACE`: Display `DEBUG` logs + the timings of all ElasticSearch queries and Web API calls executed by the SonarScanner. | `INFO`                             |
-| `sonar.verbose`                  | Add more detail to both client and server-side analysis logs. Activates `DEBUG` mode for the scanner, and adds client-side environment variables and system properties to server-side log of analysis report processing. ![img](https://docs.sonarqube.org/7.9/images/exclamation.svg)NOTE: There is the potential for this setting to expose sensitive information such as passwords if they are stored as server-side environment variables. | false                              |
-| `sonar.showProfiling`            | Display logs to see where the analyzer spends time. This parameter generates a file containing these timing infos in `<workingDir>/profiling/<moduleKey>-profiler.xml` where `<workingDir>` is: `.sonar/profiling/` when analysis is run with SonarScanner, and `target/sonar/profiling/` when SonarScanner for Maven is used. | `false`                            |
-| `sonar.scanner.dumpToFile`       | Outputs to the specified file the full list of properties passed to the scanner API as a means to debug analysis. |                                    |
-| `sonar.scanner.metadataFilePath` | Set the location where the scanner writes the `report-task.txt` file containing among other things the `ceTaskId`. | value of `sonar.working.directory` |
+| Key                              | Description                                                  | Default                       |
+| -------------------------------- | ------------------------------------------------------------ | ----------------------------- |
+| `sonar.log.level`                | 设定分析过程中产生日志的数量和级别。`DEBUG`: 显示 `INFO` 日志 + 更多`DEBUG` 级别的日志. 类似于 `sonar.verbose=true`. `TRACE`: 显示 `DEBUG` 日志 + 所有ElasticSearch查询和SonarScanner调用WebAPI的计时。 | `INFO`                        |
+| `sonar.verbose`                  | 记录更多的客户端和服务端的分析日志，激活Scanner的`DEBUG`模式并添加客户端侧的环境变量和系统属性到服务器端的分析报告处理日志。![img](https://docs.sonarqube.org/7.9/images/exclamation.svg)注意：用该属性可能泄露密码等被存储为服务器端环境变量的敏感信息。 | `false`                       |
+| `sonar.showProfiling`            | 记录时间相关日志，用来查看分析器在哪里花了更多的时间。该参数生成一个文件，包含这些计时信息：`<workingDir>/profiling/<moduleKey>-profiler.xml`。其中`<workingDir>`在使用SonarScanner进行分析时是`.sonar/profiling/`；当使SonarScanner for Maven的时候是用`target/sonar/profiling/`。 | `false`                       |
+| `sonar.scanner.dumpToFile`       | 将传给scanner API的所有属性清单输出到一个文件，用来进行排错分析。 |                               |
+| `sonar.scanner.metadataFilePath` | 设定scanner写入`report-task.txt`文件的路径，包含`ceTaskId`及其他信息。 | `sonar.working.directory`的值 |
 
  
+
+> 原文链接：<https://docs.sonarqube.org/latest/analysis/analysis-parameters/>
+
