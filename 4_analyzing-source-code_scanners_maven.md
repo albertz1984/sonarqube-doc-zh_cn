@@ -6,7 +6,7 @@ By [SonarSource](https://www.sonarsource.com/) – GNU LGPL 3 – [JIRA](http
 
 我们推荐使用SonarScanner作为Maven项目的默认分析工具。
 
-用户可通过一个常规的Maven目标(goal)来执行SonarQube分析。任何情况下，只要有Maven可用，SonarQube分析就可以执行。例如：在开发者本地构建、持续集成服务器上执行SonarQube时无需单独手工下载和配置一个SonarQube Runner。Maven构建已经包含了很多SonarQube成功分析一个项目所需要的信息。基于这些信息，分析过程已经被预先配置刚好，明显减少了手工配置。
+用户可通过一个常规的Maven目标(goal)来执行SonarQube分析。任何情况下，只要有Maven可用，SonarQube分析就可以执行。例如：在开发者本地构建、持续集成服务器上执行SonarQube时无需单独手工下载和配置一个SonarQube Runner。Maven构建已经包含了很多SonarQube成功分析一个项目所需要的信息。基于这些信息，分析过程已经被预先配置刚好，显著降低手工配置工作量。
 
 ## 前提
 - Maven 3.x
